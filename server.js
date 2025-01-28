@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const Patient = require('./models/patientModel')
 require('dotenv').config();
+const mongodbUrl=process.env.MONGO_URL
 
 const app = express();
 app.use(cors());
@@ -88,7 +89,7 @@ const PORT = process.env.PORT || 3000;
 // scdcjs
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
 
-mongoose.connect("mongodb+srv://sugamparnami:admin123@cluster0.egbeb.mongodb.net/Tracker?retryWrites=true&w=majority&appName=Cluster0")
+mongoose.connect(mongodbUrl)
 .then(()=>{
     console.log("Database connected")
 }).catch(()=>{
