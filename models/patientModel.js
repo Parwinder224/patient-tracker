@@ -70,5 +70,13 @@ const patientSchema = mongoose.Schema(
     }
 )
 
+patientSchema.set('toJSON', {
+    virtuals: true,
+    transform: function (doc, ret, options) {
+        ret.id = ret._id;
+        delete ret._id;
+        delete ret.__v;
+    }
+});
 const Patient = mongoose.model('Patient',patientSchema);
 module.exports=Patient
