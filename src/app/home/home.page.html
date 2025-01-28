@@ -1,20 +1,90 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
+<ion-app>
+  <ion-header>
+      <ion-toolbar>
+          <ion-title>Patient List</ion-title>
+      </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
-</ion-content>
+  <ion-content>
+      <div class="container">
+          <div class="add-button">
+              <ion-button color="success" [routerLink]="'/home/add-patient'">
+                  <ion-icon name="person-add-outline"></ion-icon>Add New Patient
+              </ion-button>
+          </div>
+
+          <div class="search-bar">
+              <input type="text" placeholder="Search patients..." (input)="onSearch($event)">
+          </div>
+
+          <table>
+              <thead>
+                  <tr>
+                      <th>Name</th>
+                      <th>Age</th>
+                      <th>Gender</th>
+                      <th>Address</th>
+                      <th>Complaint</th>
+                      <th>Medical history</th>
+                      <th>Investigation</th>
+                      <th>diagnosis</th>
+                      <th>Treatment plan</th>
+                      <th>Remarks</th>
+                      <th>Old patient</th>
+                      <th>action</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let patient of patientData,let i = index">
+                      <td>{{ patient.name }}</td>
+                      <td>{{ patient.age }}</td>
+                      <td>{{ patient.genderr}}</td>
+                      <td>{{ patient.address}}</td>
+                      <td>{{ patient.complaint}}</td>
+                      <td>{{ patient.medical_history}}</td>
+                      <td>{{ patient.investigations}}</td>
+                      <td>{{ patient.diagnosis}}</td>
+                      <td>{{ patient.treatment_plan}}</td>
+                      <td>{{ patient.remarks}}</td>
+                      <td>{{ patient.old_patient}}</td>  
+
+                      <td>
+                        <div class="action-buttons">
+                          <ion-button size="small" color="primary" [routerLink]="['/home/edit-patient', patient.id]">
+                            <ion-icon name="create-outline"></ion-icon>Edit
+                          </ion-button> 
+                          <ion-button size="small" color="danger" (click)="deletePatient(patient.id,i)">
+                            <ion-icon name="trash-outline"></ion-icon>Delete
+                          </ion-button>
+                          <!-- <ion-button size="small" color="tertiary" (click)="viewDetails(patient.name)">
+                            <ion-icon name="eye-outline"></ion-icon>View
+                          </ion-button> -->
+                        </div>
+                      </td>
+                      
+                  </tr>
+              </tbody>
+          </table>
+
+          <div class="pagination">
+              <ion-button size="small" (click)="prevPage()" [disabled]="currentPage === 1">
+                  <ion-icon name="chevron-back-outline"></ion-icon>Previous
+              </ion-button>
+              <ion-button size="small" (click)="nextPage()" [disabled]="currentPage === totalPages">
+                  Next<ion-icon name="chevron-forward-outline"></ion-icon>
+              </ion-button>
+          </div>
+
+          <div class="patient-details" [class.active]="selectedPatient">
+              <h3>Patient Details</h3>
+              <p><strong>Name:</strong> {{ selectedPatient?.name }}</p>
+              <p><strong>Age:</strong> {{ selectedPatient?.age }}</p>
+              <p><strong>Condition:</strong> {{ selectedPatient?.condition }}</p>
+              <p><strong>Contact:</strong> {{ selectedPatient?.contact }}</p>
+              <ion-button size="small" color="light" (click)="closeDetails()">
+                  <ion-icon name="close-circle-outline"></ion-icon>Close
+              </ion-button>
+          </div>
+      </div>
+  </ion-content>
+</ion-app>

@@ -1,0 +1,122 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title class="form-title">Add Patient</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="form-content">
+  <form [formGroup]="patientForm" (ngSubmit)="onSubmit()">
+    <!-- Patient Information -->
+    <ion-card class="form-card">
+      <ion-card-header class="card-header">
+        <ion-card-title>Patient Information</ion-card-title>
+      </ion-card-header>
+      <ion-card-content class="card-content">
+        <ion-item>
+          <ion-label position="floating">Name</ion-label>
+          <ion-input formControlName="name" required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Age</ion-label>
+          <ion-input type="number" formControlName="age" required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Gender</ion-label>
+          <ion-select formControlName="gender" placeholder="Select Gender">
+            <ion-select-option [value]="1">Male</ion-select-option>
+            <ion-select-option [value]="2">Female</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Address</ion-label>
+          <ion-input formControlName="address" required></ion-input>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Complaint Section -->
+    <ion-card class="form-card">
+      <ion-card-header class="card-header">
+        <ion-card-title>Complaint</ion-card-title>
+      </ion-card-header>
+      <ion-card-content class="card-content">
+        <ion-item>
+          <ion-label position="floating">Complaint</ion-label>
+          <ion-input formControlName="complaint" required></ion-input>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Medical History Section -->
+    <ion-card class="form-card">
+      <ion-card-header class="card-header">
+        <ion-card-title>Medical History</ion-card-title>
+      </ion-card-header>
+      <ion-card-content class="card-content">
+        <ion-item>
+          <ion-label position="floating">Medical History</ion-label>
+          <ion-textarea formControlName="medical_history" required></ion-textarea>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Investigation & Diagnosis Section -->
+    <ion-card class="form-card">
+      <ion-card-header class="card-header">
+        <ion-card-title>Investigation & Diagnosis</ion-card-title>
+      </ion-card-header>
+      <ion-card-content class="card-content">
+        <ion-item>
+          <ion-label position="floating">Investigation</ion-label>
+          <ion-textarea formControlName="investigations" required></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Diagnosis</ion-label>
+          <ion-textarea formControlName="diagnosis" required></ion-textarea>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Treatment Plan Section -->
+    <ion-card class="form-card">
+      <ion-card-header class="card-header">
+        <ion-card-title>Treatment Plan</ion-card-title>
+      </ion-card-header>
+      <ion-card-content class="card-content">
+        <ion-item>
+          <ion-label position="floating">Treatment Plan</ion-label>
+          <ion-textarea formControlName="treatment_plan" required></ion-textarea>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Remarks Section -->
+    <ion-card class="form-card">
+      <ion-card-header class="card-header">
+        <ion-card-title>Remarks</ion-card-title>
+      </ion-card-header>
+      <ion-card-content class="card-content">
+        <ion-item>
+          <ion-label position="floating">Remarks</ion-label>
+          <ion-textarea formControlName="remarks" required></ion-textarea>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Old Patient Toggle -->
+    <ion-item>
+      <ion-label>Old Patient</ion-label>
+      <ion-toggle formControlName="old_patient"></ion-toggle>
+    </ion-item>
+
+    <!-- Submit Button -->
+    <ion-button expand="full" type="submit" [disabled]="!patientForm.valid" color="success" class="action-btn">
+      <ion-icon name="checkmark-circle-outline"></ion-icon> Save Patient
+    </ion-button>
+    <ion-button expand="full" color="danger" (click)="resetForm()" class="action-btn">
+      <ion-icon name="refresh-outline"></ion-icon> Reset
+    </ion-button>
+  </form>
+</ion-content>
+
+

@@ -1,27 +1,148 @@
-#container {
+body {
+  background: radial-gradient(circle, #e3f2fd, #bbdefb);
+  font-family: 'Poppins', sans-serif;
+  color: #2e3a59;
+}
+
+.container:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+
+ion-button[color="primary"] ion-icon,
+ion-button[color="danger"] ion-icon {
+  margin-right: 6px;
+  font-size: 18px;
+}
+
+ion-button[color="tertiary"] ion-icon {
+  margin-right: 6px;
+  font-size: 18px;
+}
+
+ion-toolbar {
+  --background: linear-gradient(to right, #2196f3, #64b5f6);
+}
+
+.search-bar {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.search-bar input {
+  width: 60%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination ion-button {
+  margin: 0 5px;
+}
+
+.add-button {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.patient-details {
+  display: none;
+  padding: 20px;
+  background: #f5f7fb;
+  border-radius: 12px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.patient-details.active {
+  display: block;
+}
+
+ion-icon {
+  margin-right: 6px;
+}
+
+.container {
+  padding: 25px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  margin: 40px auto;
+  max-width: 90%;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  overflow-x: auto; /* Enable horizontal scrolling */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 12px;
+  overflow: hidden;
+  table-layout: auto; /* Ensures columns are laid out properly */
+  min-width: 600px; /* Optional: set a minimum width for the table */
+}
+
+th, td {
+  text-align: left;
+  padding: 14px;
+  border-bottom: 1px solid #ebeff5;
+}
+
+th {
+  background-color: #1e88e5;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+tr ,td{
+color: black;
+// word-break: break-word;
+}
+
+// tr:nth-child(even) {
+//   background-color: #f5f7fb;
+//   color: black;
+// }
+
+// tr:hover {
+//   // background-color: #e3f2fd;
+//   color:black;
+//   transform: scale(1.02);
+//   transition: transform 0.2s ease-in-out, background-color 0.3s ease-in-out;
+// }
+
+/* Action Buttons Column */
+table td:last-child {
+  width: 150px; /* Ensure there's enough space for the buttons */
   text-align: center;
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+.action-buttons {
+  display: flex;
+  justify-content: space-around;
+  gap: 8px;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
+ion-button {
+  --border-radius: 20px;
+  --box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
+  font-size: 14px;
+  padding: 0 10px;
 }
 
-#container a {
-  text-decoration: none;
+
+ion-button[color="tertiary"] {
+  background: linear-gradient(to right, #26c6da, #4dd0e1);
 }

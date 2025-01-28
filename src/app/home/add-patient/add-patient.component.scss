@@ -1,0 +1,106 @@
+.form-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    text-align: center;
+    color: #fff;
+  }
+
+  .form-content {
+    background: #f3f4f6; /* Light neutral background */
+    padding: 20px;
+  }
+
+  .form-card {
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .form-card:hover {
+    transform: scale(1.02);
+  }
+
+  .card-header {
+    background: #5c6bc0; /* Soft Blue */
+    color: white;
+    font-weight: bold;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .card-content {
+    background-color: #fff;
+    padding: 15px;
+  }
+
+  ion-button.action-btn {
+    border-radius: 5px;
+    margin-top: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: transform 0.2s;
+  }
+
+  ion-button.action-btn:hover {
+    transform: scale(1.05);
+  }
+
+  .ion-label {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+  }
+
+  ion-item {
+    margin-bottom: 10px;
+  }
+
+  ion-select,
+  ion-input,
+  ion-textarea {
+    // background-color: #f9f9f9;
+    opacity: 0.5;
+    border-radius: 5px;
+    padding-left: 10px;
+  }
+
+  ion-toggle {
+    margin-left: auto;
+  }
+
+  /* Gradient Background for Toolbar */
+  ion-toolbar[color="primary"] {
+    background: #5c6bc0; /* Soft Blue */
+  }
+
+  /* Mobile Responsive Styles */
+  @media (max-width: 600px) {
+    .form-title {
+      font-size: 20px;
+    }
+
+    .form-content {
+      padding: 10px;
+    }
+
+    .form-card {
+      margin-bottom: 15px;
+    }
+
+    .card-header {
+      font-size: 16px;
+    }
+
+    ion-button {
+      font-size: 14px;
+    }
+
+    ion-input,
+    ion-select,
+    ion-textarea {
+      font-size: 14px;
+    }
+
+    ion-label {
+      font-size: 14px;
+    }
+  }
