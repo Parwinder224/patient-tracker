@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PatientService } from '../services/patient.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: false,
+ 
 })
 export class HomePage implements OnInit {
   patients: any = [];
@@ -15,12 +17,16 @@ export class HomePage implements OnInit {
   filteredPatients = [];
   currentPage = 1;
   patientsPerPage = 5;
+  selectedTab: string = 'All records';
   // totalPages = Math.ceil(this.patientData.length / this.patientsPerPage);
 
   selectedPatient: any = null;
   totalPages!: number;
+  searchTerm: string = '';
 
-  constructor(private patientService: PatientService, private route: ActivatedRoute) {
+  constructor(private patientService: PatientService, private route: ActivatedRoute,private router:Router,
+    private loadingController: LoadingController,private http: HttpClient
+  ) {
     this.getPatientDetail();
   }
 
@@ -32,18 +38,36 @@ export class HomePage implements OnInit {
     });
   }
 
+  onTitleClick(id:any) {
+     if(id){
+      this.router.navigate(['/home/edit-patient'+ '/' +id]);
+    }    
+  }
   // get patient list
-  getPatientDetail() {
+  async getPatientDetail() {
+    const loading = await this.loadingController.create({
+      message: 'Loading data...',
+      spinner: 'crescent',
+    });
+
+    await loading.present();
     this.patientService.getAllPatientData().subscribe((data: any) => {
       this.patientData = data;
-      this.patientData.forEach((e: any) => {
+      this.filteredPatients =data;
+      this.patientData.forEach(async (e: any) => {
         if (e.gender == 1) {
           e.genderr = 'Male';
         }
         else if (e.gender == 2) {
           e.genderr = 'Female';
         }
-      });
+        await loading.dismiss();
+      },
+      async (error: any) => {
+        console.error(error);
+        await loading.dismiss();
+      }
+    );
     })
   }
 
@@ -55,7 +79,12 @@ export class HomePage implements OnInit {
     }
   }
 
-
+  filterData() {
+    this.filteredPatients = this.searchTerm
+      ? this.patientData.filter((item: { name: string; }) => item.name.toLowerCase().includes(this.searchTerm.toLowerCase()))
+      : [...this.patientData]; // Reset if search is empty
+      console.log("filter",this.filteredPatients)
+  }
   // Close patient detailsz
   closeDetails() {
     this.selectedPatient = null;
