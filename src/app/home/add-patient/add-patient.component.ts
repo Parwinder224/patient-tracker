@@ -17,6 +17,7 @@ export class AddPatientComponent implements OnInit {
 
   patientForm!: FormGroup;
   getId!: any;
+  patientLabel ='Add';
 
   constructor(private formBuilder: FormBuilder,
     private patientService: PatientService,
@@ -46,6 +47,7 @@ export class AddPatientComponent implements OnInit {
     });
 
     if (this.getId) {
+      this.patientLabel = this.getId ? 'Edit' : 'Add'
       this.patientService.getPatient(this.getId).subscribe((data: any) => {
         if (data) {
           this.patientForm.patchValue({   

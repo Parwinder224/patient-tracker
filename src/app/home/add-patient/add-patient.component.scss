@@ -1,3 +1,16 @@
+ion-content {
+  display: contents;
+  min-height: 100%;  // Ensure it has height
+  padding: 16px;     // Add padding if needed
+}
+ion-card {
+  width: 100%;
+  max-width: 700px;
+  margin: auto;
+  padding: 16px;
+  overflow: auto;
+}
+
 .form-title {
     font-family: 'Roboto', sans-serif;
     font-size: 24px;
@@ -22,7 +35,7 @@
   }
 
   .card-header {
-    background: #5c6bc0; /* Soft Blue */
+    background: linear-gradient(45deg, #c5000fb5, #ff7c3be6);
     color: white;
     font-weight: bold;
     border-radius: 10px 10px 0 0;
@@ -35,16 +48,38 @@
 
   ion-button.action-btn {
     border-radius: 5px;
-    margin-top: 15px;
+    --background: linear-gradient(45deg, #c5000fb5, #ff7c3be6);
+    // margin-top: 15px;
     font-size: 16px;
     font-weight: bold;
     transition: transform 0.2s;
   }
 
-  ion-button.action-btn:hover {
-    transform: scale(1.05);
+  .gradient-button {
+    --background: linear-gradient(45deg, #125802, #ffeb3b);
+    --color: white;
+    --border-radius: 10px;
+    --font-weight: bold;
+    text-transform: uppercase;
+    // --box-shadow: 0px 5px 10px rgba(255, 2, 102, 0.5);
+    --padding: 10px;
+    // --transition: transform 0.2s ease-in-out;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      // transform: scale(1.2);
+      color: darkred !important;
+      box-shadow: 0px 0px 15px rgba(255, 2, 102, 0.8) !important; /* Glowing effect */
+      transform: scale(1.05) !important; 
+    }
   }
 
+  .gradient-button button:hover {
+    background: linear-gradient(45deg, #ff0266, #ffeb3b) !important;
+    transform: scale(1.05);
+    box-shadow: 0px 4px 12px rgba(255, 2, 102, 0.8);
+  }
+  
   .ion-label {
     font-family: 'Arial', sans-serif;
     color: #333;

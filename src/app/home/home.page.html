@@ -1,23 +1,34 @@
 <ion-app>
-  <ion-header>
-      <ion-toolbar>
-          <ion-title>Patient List</ion-title>
-      </ion-toolbar>
-  </ion-header>
+    <!-- <ion-header>
+        <ion-toolbar>
+            <ion-title>Patient List</ion-title>
+        </ion-toolbar>
+    </ion-header> -->
 
-  <ion-content>
-      <div class="container">
-          <div class="add-button">
-              <ion-button color="success" [routerLink]="'/home/add-patient'">
-                  <ion-icon name="person-add-outline"></ion-icon>Add New Patient
-              </ion-button>
-          </div>
+    <!-- <ion-content> -->
+    <!-- <div class="container">
+            <div class="add-button">
+                <ion-button color="success" [routerLink]="'/home/add-patient'">
+                    <ion-icon name="person-add-outline"></ion-icon>Add New Patient
+                </ion-button>
+            </div>
 
-          <div class="search-bar">
-              <input type="text" placeholder="Search patients..." (input)="onSearch($event)">
-          </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search patients..." (input)="onSearch($event)">
+            </div> -->
+    <!-- <ion-header>
+                <ion-toolbar color="primary">
+                  
+                  <ion-title>Patient Details</ion-title>
+                </ion-toolbar>
+              </ion-header> -->
 
-          <table>
+
+
+
+
+
+    <!-- <table>
               <thead>
                   <tr>
                       <th>Name</th>
@@ -56,35 +67,136 @@
                           <ion-button size="small" color="danger" (click)="deletePatient(patient.id,i)">
                             <ion-icon name="trash-outline"></ion-icon>Delete
                           </ion-button>
-                          <!-- <ion-button size="small" color="tertiary" (click)="viewDetails(patient.name)">
+                          <ion-button size="small" color="tertiary" (click)="viewDetails(patient.name)">
                             <ion-icon name="eye-outline"></ion-icon>View
-                          </ion-button> -->
+                          </ion-button>
                         </div>
                       </td>
                       
                   </tr>
               </tbody>
-          </table>
+          </table> -->
+    <!-- <div>
+                <div class="add-button">
+                    <ion-button color="success" [routerLink]="'/home/add-patient'">
+                        <ion-icon name="person-add-outline"></ion-icon>Add New Patient
+                    </ion-button>
+                </div>
+            </div> -->
+            <ion-header>
+        <!-- <ion-toolbar> -->
+            <ion-title class="header-title">Patient Tracker</ion-title>
+        <!-- </ion-toolbar> -->
+    </ion-header>
+    <ion-header>
 
-          <div class="pagination">
-              <ion-button size="small" (click)="prevPage()" [disabled]="currentPage === 1">
-                  <ion-icon name="chevron-back-outline"></ion-icon>Previous
-              </ion-button>
-              <ion-button size="small" (click)="nextPage()" [disabled]="currentPage === totalPages">
-                  Next<ion-icon name="chevron-forward-outline"></ion-icon>
-              </ion-button>
-          </div>
 
-          <div class="patient-details" [class.active]="selectedPatient">
-              <h3>Patient Details</h3>
-              <p><strong>Name:</strong> {{ selectedPatient?.name }}</p>
-              <p><strong>Age:</strong> {{ selectedPatient?.age }}</p>
-              <p><strong>Condition:</strong> {{ selectedPatient?.condition }}</p>
-              <p><strong>Contact:</strong> {{ selectedPatient?.contact }}</p>
-              <ion-button size="small" color="light" (click)="closeDetails()">
-                  <ion-icon name="close-circle-outline"></ion-icon>Close
-              </ion-button>
-          </div>
-      </div>
-  </ion-content>
+        <ion-toolbar>
+            <ion-segment [(ngModel)]="selectedTab">
+                <ion-segment-button value="All records">All records</ion-segment-button>
+
+                <ion-segment-button value="Add record">Add record</ion-segment-button>
+            </ion-segment>
+        </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+        <div *ngIf="selectedTab === 'All records'">
+            <div class="container">
+                <!-- <div class="search-bar">
+                    <input type="text" placeholder="Search patients..." (input)="onSearch($event)">
+                </div> -->
+                <!-- <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="filterData()"></ion-searchbar> -->
+                <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="filterData()"></ion-searchbar>
+                <div class="patient-cards">
+                    <!-- Patient Card 1 -->
+                    <ion-card *ngFor="let patient of patientData,let i = index">
+                        <ion-card-header>
+                            <ion-item lines="none" class="card-header">
+                                <ion-card-title class="clickable-title"
+                                    (click)="onTitleClick(patient.id)">{{patient.name}}</ion-card-title>
+                                <ion-icon name="trash" class="delete-icon" slot="end"
+                                    (click)="deletePatient(patient.id,i)"></ion-icon>
+                            </ion-item>
+                            <ion-item>
+                                <p><strong>Age:</strong> {{patient.age}}</p>
+                            </ion-item>
+
+                        </ion-card-header>
+
+                        <ion-card-content>
+                            <p><strong>Gender:</strong> {{patient.genderr}}</p>
+                            <p><strong>Diagnosis:</strong> {{patient.diagnosis}}</p>
+
+                        </ion-card-content>
+                    </ion-card>
+
+
+
+                    <!-- Add more patient cards here -->
+                </div>
+                <div class="pagination">
+                    <ion-button size="small" (click)="prevPage()" [disabled]="currentPage === 1">
+                        <ion-icon name="chevron-back-outline"></ion-icon>Previous
+                    </ion-button>
+                    <ion-button size="small" (click)="nextPage()" [disabled]="currentPage === totalPages">
+                        Next<ion-icon name="chevron-forward-outline"></ion-icon>
+                    </ion-button>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="selectedTab === 'Add record'">
+            <!-- <div  > -->
+            <app-add-patient></app-add-patient>
+            <!-- <div class="patient-details" *ngFor="let patient of patientData,let i = index">
+                        <p><strong>Name:</strong> {{ patient?.name }}</p>
+                        <p><strong>Age:</strong> {{ patient?.age }}</p>
+                        <p><strong>address:</strong> {{ patient.address}}</p>
+                        <p><strong>gender:</strong> {{ patient?.genderr }}</p>
+                        <p><strong>Complaint:</strong>{{ patient.complaint}}</p>
+                        <p><strong>Medical history:</strong>{{ patient.medical_history}}</p>
+                        <p><strong>Investigation:</strong>{{ patient.investigations}}</p>
+                        <p><strong>Diagnosis:</strong>{{ patient.diagnosis}}</p>
+                        <p><strong>Treatment plan:</strong>{{ patient.treatment_plan}}</p>
+                        <p><strong>Remarks:</strong>{{ patient.remarks}}</p>
+                        <p><strong>Old patient:</strong>{{ patient.old_patient}}</p>
+                        <div class="action-buttons">
+                            <ion-button size="small" color="primary" [routerLink]="['/home/edit-patient', patient.id]">
+                              <ion-icon name="create-outline"></ion-icon>Edit
+                            </ion-button> 
+                            <ion-button size="small" color="danger" (click)="deletePatient(patient.id,i)">
+                              <ion-icon name="trash-outline"></ion-icon>Delete
+                            </ion-button>
+                          
+                          </div>
+                    </div> -->
+
+
+            <!-- </div> -->
+        </div>
+
+    </ion-content>
+
+
+    <!-- <div class="pagination">
+                <ion-button size="small" (click)="prevPage()" [disabled]="currentPage === 1">
+                    <ion-icon name="chevron-back-outline"></ion-icon>Previous
+                </ion-button>
+                <ion-button size="small" (click)="nextPage()" [disabled]="currentPage === totalPages">
+                    Next<ion-icon name="chevron-forward-outline"></ion-icon>
+                </ion-button>
+            </div> -->
+
+    <!-- <div class="patient-details" [class.active]="selectedPatient">
+            <h3>Patient Details</h3>
+            <p><strong>Name:</strong> {{ selectedPatient?.name }}</p>
+            <p><strong>Age:</strong> {{ selectedPatient?.age }}</p>
+            <p><strong>Condition:</strong> {{ selectedPatient?.condition }}</p>
+            <p><strong>Contact:</strong> {{ selectedPatient?.contact }}</p>
+            <ion-button size="small" color="light" (click)="closeDetails()">
+                <ion-icon name="close-circle-outline"></ion-icon>Close
+            </ion-button>
+        </div> -->
+    <!-- </div> -->
+    <!-- </ion-content> -->
 </ion-app>

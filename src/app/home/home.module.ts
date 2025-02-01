@@ -6,6 +6,7 @@ import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
 import {   HttpClientModule } from '@angular/common/http';
+import { AddPatientComponent } from './add-patient/add-patient.component';
 
 @NgModule({
   imports: [
@@ -14,10 +15,11 @@ import {   HttpClientModule } from '@angular/common/http';
     IonicModule,
     HomePageRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule,  
-  ],
+    HttpClientModule,
+    AddPatientComponent
+],
 
-  declarations: [HomePage  ]
+    declarations: [HomePage  ]
 })
 export class HomePageModule {
 
